@@ -7,9 +7,25 @@
 //
 
 import UIKit
-class SearchTrainRouter: PresenterToRouterProtocol {
+
+protocol BaseRouterProtocol {
+    static func storyboardFor(_ name: String) -> UIStoryboard
+}
+
+extension BaseRouterProtocol {
+    static func storyboardFor(_ name: String) -> UIStoryboard {
+        return UIStoryboard(name: name,bundle: Bundle.main)
+    }
+}
+
+class SearchTrainRouter: BaseRouterProtocol, PresenterToRouterProtocol {
+    func pushToFavouriteStationScreen(navigationConroller: UINavigationController) {
+        let favouriteStationModule = FavouriteStationRouter.createModule()
+        navigationConroller.pushViewController(favouriteStationModule,animated: true)
+    }
+    
     static func createModule() -> SearchTrainViewController {
-        let view = mainstoryboard.instantiateViewController(withIdentifier: "searchTrain") as! SearchTrainViewController
+        let view = storyboardFor(Storyboard.main).instantiateViewController(withIdentifier: "searchTrain") as! SearchTrainViewController
         let presenter: ViewToPresenterProtocol & InteractorToPresenterProtocol = SearchTrainPresenter()
         let interactor: PresenterToInteractorProtocol = SearchTrainInteractor()
         let router:PresenterToRouterProtocol = SearchTrainRouter()
@@ -22,8 +38,11 @@ class SearchTrainRouter: PresenterToRouterProtocol {
 
         return view
     }
-
-    static var mainstoryboard: UIStoryboard{
-        return UIStoryboard(name:"Main",bundle: Bundle.main)
+    
+    func pushToMovieScreen(navigationConroller navigationController:UINavigationController) {
+        let movieModue = FavouriteStationRouter.createModule()
+        movieModue.modalPresentationStyle = .overCurrentContext
+        navigationController.present(movieModue, animated: true, completion: nil)
+        
     }
 }

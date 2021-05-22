@@ -17,9 +17,9 @@ class SearchTrainInteractor: PresenterToInteractorProtocol {
     func fetchallStations() {
         if Reach().isNetworkReachable() == true {
             let urlString = "http://api.irishrail.ie/realtime/realtime.asmx/getAllStationsXML"
-            APIClient.shared.decodingTask(with: URLRequest(url: URL(string: urlString)!), decodingType: StationData.self) { (response) in
+            APIClient.shared.fetchResponse(with: URLRequest(url: URL(string: urlString)!)) { (response) in
                 let station = try? XMLDecoder().decode(Stations.self, from: response!)
-                self.presenter!.stationListFetched(list: station!.stationsList)
+                self.presenter!.stationListFetched(list: station?.stationsList ?? [])
             }
         } else {
             self.presenter!.showNoInterNetAvailabilityMessage()
@@ -31,7 +31,7 @@ class SearchTrainInteractor: PresenterToInteractorProtocol {
         _destinationStationCode = destinationCode
         let urlString = "http://api.irishrail.ie/realtime/realtime.asmx/getStationDataByCodeXML?StationCode=\(sourceCode)"
         if Reach().isNetworkReachable() {
-            APIClient.shared.decodingTask(with: URLRequest(url: URL(string: urlString)!), decodingType: StationData.self) { (response) in
+            APIClient.shared.fetchResponse(with: URLRequest(url: URL(string: urlString)!)) { (response) in
                 let stationData = try? XMLDecoder().decode(StationData.self, from: response!)
                 if let _trainsList = stationData?.trainsList {
                     self.proceesTrainListforDestinationCheck(trainsList: _trainsList)
@@ -57,7 +57,7 @@ class SearchTrainInteractor: PresenterToInteractorProtocol {
             let _urlString = "http://api.irishrail.ie/realtime/realtime.asmx/getTrainMovementsXML?TrainId=\(trainsList[index].trainCode)&TrainDate=\(dateString)"
             if Reach().isNetworkReachable() {
                 let request = URLRequest(url: URL(string: _urlString)!)
-                APIClient.shared.decodingTask(with: request, decodingType: TrainMovementsData.self) { (movementsData) in
+                APIClient.shared.fetchResponse(with: request) { (movementsData) in
                     let trainMovements = try? XMLDecoder().decode(TrainMovementsData.self, from: movementsData!)
 
                     if let _movements = trainMovements?.trainMovements {
@@ -90,7 +90,7 @@ class APIClient {
     private init() { }
     typealias JsonRequestHandler = (Data?) -> ()
     
-    func decodingTask<T: Decodable>(with request: URLRequest, decodingType: T.Type, completionHandler completion: @escaping JsonRequestHandler) {
+    func fetchResponse(with request: URLRequest, completionHandler completion: @escaping JsonRequestHandler) {
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {
                 completion(data)

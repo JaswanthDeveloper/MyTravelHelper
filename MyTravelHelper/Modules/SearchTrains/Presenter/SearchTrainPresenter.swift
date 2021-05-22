@@ -9,6 +9,10 @@
 import UIKit
 
 class SearchTrainPresenter:ViewToPresenterProtocol {
+    func showFavouriteStationController(navigationController: UINavigationController) {
+        router?.pushToFavouriteStationScreen(navigationConroller: navigationController)
+    }
+    
     var stationsList:[Station] = [Station]()
 
     func searchTapped(source: String, destination: String) {

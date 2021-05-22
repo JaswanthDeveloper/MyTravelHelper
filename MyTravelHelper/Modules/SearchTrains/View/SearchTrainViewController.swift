@@ -14,7 +14,9 @@ class SearchTrainViewController: UIViewController {
     @IBOutlet weak var destinationTextField: UITextField!
     @IBOutlet weak var sourceTxtField: UITextField!
     @IBOutlet weak var trainsListTable: UITableView!
-
+    @IBOutlet weak var searchButton: UIButton!
+    @IBOutlet weak var favouriteStationHolderView: UIView!
+    
     var stationsList:[Station] = [Station]()
     var trains:[StationTrain] = [StationTrain]()
     var presenter:ViewToPresenterProtocol?
@@ -24,9 +26,30 @@ class SearchTrainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         trainsListTable.isHidden = true
+        initialSetup()
+    }
+    
+    private func initialSetup() {
+        searchButton?.isEnabled = false
+        
+        let favouriteStationView = Bundle.main.loadNibNamed("FavouriteStationView", owner: nil, options: nil)?.first as! FavouriteStationView
+        favouriteStationView.delegate = self
+        favouriteStationHolderView.addSubview(favouriteStationView)
+        favouriteStationView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: favouriteStationView, attribute: .top, relatedBy: .equal, toItem: favouriteStationHolderView, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: favouriteStationView, attribute: .bottom, relatedBy: .equal, toItem: favouriteStationHolderView, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: favouriteStationView, attribute: .left, relatedBy: .equal, toItem: favouriteStationHolderView, attribute: .left, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: favouriteStationView, attribute: .right, relatedBy: .equal, toItem: favouriteStationHolderView, attribute: .right, multiplier: 1.0, constant: 0).isActive = true
     }
 
+    func updateUI(textField: UITextField, updatedText: String) {
+        searchButton?.isEnabled = !((sourceTxtField == sourceTxtField ? destinationTextField : sourceTxtField).text?.isEmpty ?? false || updatedText.isEmpty)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         if stationsList.count == 0 {
             SwiftSpinner.useContainerView(view)
             SwiftSpinner.show("Please wait loading station list ....")
@@ -119,7 +142,7 @@ extension SearchTrainViewController:UITextFieldDelegate {
             }else {
                 desiredSearchText = String(desiredSearchText.dropLast())
             }
-
+            updateUI(textField: textField, updatedText: desiredSearchText)
             dropDown.dataSource = stationsList.map {$0.stationDesc}
             dropDown.show()
             dropDown.reloadAllComponents()
@@ -149,5 +172,18 @@ extension SearchTrainViewController:UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 140
     }
+    
 }
 
+extension SearchTrainViewController: FavouriteStationViewDelegate {
+    func segemntControlActionFor(_favouriteStationType: FavouriteStationType) {
+        
+    }
+    
+    func buttonActionFor(_ avouriteStationActionType: FavouriteStationActionType) {
+        guard let navigationController = navigationController else { return }
+        presenter?.showFavouriteStationController(navigationController: navigationController)
+    }
+    
+    
+}

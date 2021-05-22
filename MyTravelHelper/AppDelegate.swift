@@ -14,9 +14,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let notice = SearchTrainRouter.createModule()
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        UIApplication.shared.windows.first?.rootViewController = notice
-        UIApplication.shared.windows.first?.makeKeyAndVisible()
+        let navigationController = UINavigationController()
+        navigationController.isNavigationBarHidden = true
+        navigationController.viewControllers = [notice]
+        window = UIWindow(frame: UIScreen.main.bounds)
+        UIApplication.shared.windows.first?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
          return true
     }
 }
