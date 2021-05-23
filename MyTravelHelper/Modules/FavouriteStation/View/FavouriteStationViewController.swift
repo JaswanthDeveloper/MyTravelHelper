@@ -8,25 +8,63 @@
 
 import UIKit
 
+enum StationType {
+    case from
+    case to
+}
+protocol FavouriteStationDelegate: class {
+    func onCancel()
+    func onSlection(_ station: Station)
+}
+
+struct FavouriteStationDataSource {
+    var stationsList: [Station] = [Station]()
+    var selectedStation: Station?
+    
+    init(stationsList: [Station], selectedStation: Station?) {
+        self.stationsList = stationsList
+        self.selectedStation = selectedStation
+    }
+}
+
 class FavouriteStationViewController: UIViewController {
 
     @IBOutlet weak var stationListTableView: UITableView!
-
-    var stationsList:[Station] = [Station]()
-    var presenter: ViewToFavouriteStationPresenterProtocol?
-
+    @IBOutlet weak var holderView: UIView!
+    weak var delegate: FavouriteStationDelegate?
+    
+    private var stationsList: [Station] {
+        return favouriteStationDataSource?.stationsList ?? []
+    }
+    private var selectedStation: Station? {
+        return favouriteStationDataSource?.selectedStation
+    }
+    var favouriteStationDataSource: FavouriteStationDataSource?
+    weak var presenter: ViewToFavouriteStationPresenterProtocol?
+    
+    deinit {
+        print("deinit - FavouriteStationViewController")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // test station
-        let station = Station(desc: "Belfast Central", latitude: 54.6123, longitude: -5.91744, code: "BFSTC", stationId: 228)
-        stationsList.append(station)
         configureTableView()
+        holderView?.layer.borderWidth = 0.4
+        holderView?.layer.cornerRadius = 20
+        holderView?.layer.borderColor = UIColor.black.cgColor
+        holderView.clipsToBounds = true
     }
     
     func configureTableView() {
         stationListTableView?.dataSource = self
         stationListTableView?.delegate = self
         stationListTableView?.register(UINib(nibName: "FavouriteStationTableViewCell", bundle: nil), forCellReuseIdentifier: "FavouriteStationTableViewCell")
+    }
+    
+    // MARK: - Button Action
+    
+    @IBAction func backButtonAction(_ sender: Any) {
+        delegate?.onCancel()
     }
 }
 
@@ -44,6 +82,11 @@ extension FavouriteStationViewController: UITableViewDataSource, UITableViewDele
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let station = stationsList[indexPath.row]
+        delegate?.onSlection(station)
     }
 }
 

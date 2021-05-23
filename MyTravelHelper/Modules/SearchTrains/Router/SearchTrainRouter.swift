@@ -19,9 +19,16 @@ extension BaseRouterProtocol {
 }
 
 class SearchTrainRouter: BaseRouterProtocol, PresenterToRouterProtocol {
-    func pushToFavouriteStationScreen(navigationConroller: UINavigationController) {
+    func popFavouriteStationScreen(navigationController: UINavigationController) {
+        navigationController.dismiss(animated: true, completion: nil)
+    }
+    
+    func pushToFavouriteStationScreen(navigationController: UINavigationController, dataSource: FavouriteStationDataSource) {
         let favouriteStationModule = FavouriteStationRouter.createModule()
-        navigationConroller.pushViewController(favouriteStationModule,animated: true)
+        favouriteStationModule.delegate = navigationController.topViewController as? SearchTrainViewController
+        favouriteStationModule.favouriteStationDataSource = dataSource
+        favouriteStationModule.modalPresentationStyle = .overCurrentContext
+        navigationController.present(favouriteStationModule, animated: true, completion: nil)
     }
     
     static func createModule() -> SearchTrainViewController {
@@ -37,12 +44,5 @@ class SearchTrainRouter: BaseRouterProtocol, PresenterToRouterProtocol {
         interactor.presenter = presenter
 
         return view
-    }
-    
-    func pushToMovieScreen(navigationConroller navigationController:UINavigationController) {
-        let movieModue = FavouriteStationRouter.createModule()
-        movieModue.modalPresentationStyle = .overCurrentContext
-        navigationController.present(movieModue, animated: true, completion: nil)
-        
     }
 }

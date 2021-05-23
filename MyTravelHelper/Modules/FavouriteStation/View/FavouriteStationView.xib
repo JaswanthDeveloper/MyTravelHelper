@@ -16,53 +16,64 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wH2-ck-LfC">
-                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <rect key="frame" x="5" y="49" width="404" height="808"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Jro-lY-xcl">
-                            <rect key="frame" x="10" y="363.5" width="199" height="91"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Jro-lY-xcl">
+                            <rect key="frame" x="10" y="357" width="314" height="94"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aqV-8M-rZz">
-                                    <rect key="frame" x="0.0" y="0.0" width="199" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="314" height="24"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favourite Station : -" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipC-a8-Kvs">
-                                            <rect key="frame" x="0.0" y="0.0" width="149" height="50"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Favourite Station : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipC-a8-Kvs">
+                                            <rect key="frame" x="0.0" y="0.0" width="156" height="24"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ezJ-Lp-Wor">
-                                            <rect key="frame" x="149" y="0.0" width="50" height="50"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ezJ-Lp-Wor">
+                                            <rect key="frame" x="156" y="0.0" width="158" height="24"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oQL-HX-JN9">
-                                    <rect key="frame" x="0.0" y="60" width="199" height="31"/>
+                                    <rect key="frame" x="0.0" y="44" width="314" height="50"/>
                                     <subviews>
                                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="wKb-gk-v36">
-                                            <rect key="frame" x="0.0" y="0.0" width="199" height="32"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="179" height="51"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <segments>
                                                 <segment title="Source"/>
                                                 <segment title="Destination"/>
                                             </segments>
+                                            <color key="selectedSegmentTintColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
                                                 <action selector="segmentControlAction:" destination="iN0-l3-epB" eventType="valueChanged" id="SgW-2w-dEW"/>
                                             </connections>
                                         </segmentedControl>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="phI-rh-0OL">
+                                            <rect key="frame" x="179" y="0.0" width="135" height="50"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </view>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" id="6an-8g-tKW"/>
+                                    </constraints>
                                 </stackView>
                             </subviews>
                         </stackView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zca-qh-VsR">
-                            <rect key="frame" x="354" y="384" width="50" height="50"/>
+                            <rect key="frame" x="344" y="379" width="50" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="xuq-cA-i7a"/>
                                 <constraint firstAttribute="width" constant="50" id="zjx-Pq-kjO"/>
                             </constraints>
-                            <state key="normal" image="plus" catalog="system"/>
-                            <state key="selected" image="clear" catalog="system"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" image="cross.fill" catalog="system"/>
+                            <state key="selected" image="delete.left.fill" catalog="system"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                     <integer key="value" value="10"/>
@@ -76,22 +87,28 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.81882798410000002" green="0.83646320860000001" blue="1" alpha="0.13802975170000001" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.29763127751884422" green="0.29927255465636077" blue="0.8662555520304569" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
+                        <constraint firstItem="zca-qh-VsR" firstAttribute="leading" secondItem="Jro-lY-xcl" secondAttribute="trailing" constant="20" id="EFA-4Q-vua"/>
                         <constraint firstItem="Jro-lY-xcl" firstAttribute="leading" secondItem="wH2-ck-LfC" secondAttribute="leading" constant="10" id="TK1-ax-qwN"/>
                         <constraint firstItem="zca-qh-VsR" firstAttribute="centerY" secondItem="Jro-lY-xcl" secondAttribute="centerY" id="TXU-p3-ERT"/>
                         <constraint firstAttribute="trailing" secondItem="zca-qh-VsR" secondAttribute="trailing" constant="10" id="Y37-fE-yQ5"/>
                         <constraint firstItem="Jro-lY-xcl" firstAttribute="centerY" secondItem="wH2-ck-LfC" secondAttribute="centerY" id="Zsq-8S-9mE"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="wH2-ck-LfC" secondAttribute="bottom" id="IUo-VD-zyD"/>
-                <constraint firstItem="wH2-ck-LfC" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="PWm-2X-UfX"/>
-                <constraint firstItem="wH2-ck-LfC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="TsL-fX-Ght"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="wH2-ck-LfC" secondAttribute="trailing" id="vSZ-TH-IxF"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="wH2-ck-LfC" secondAttribute="bottom" constant="5" id="IUo-VD-zyD"/>
+                <constraint firstItem="wH2-ck-LfC" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="5" id="PWm-2X-UfX"/>
+                <constraint firstItem="wH2-ck-LfC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="TsL-fX-Ght"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="wH2-ck-LfC" secondAttribute="trailing" constant="5" id="vSZ-TH-IxF"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
@@ -103,8 +120,8 @@
         </view>
     </objects>
     <resources>
-        <image name="clear" catalog="system" width="128" height="114"/>
-        <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="cross.fill" catalog="system" width="128" height="116"/>
+        <image name="delete.left.fill" catalog="system" width="128" height="104"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -16,8 +16,8 @@ enum FavouriteStationActionType {
 }
 
 protocol FavouriteStationViewDelegate: class {
-    func segemntControlActionFor(_favouriteStationType: FavouriteStationType)
-    func buttonActionFor(_ avouriteStationActionType: FavouriteStationActionType)
+    func segemntControlActionFor(_ favouriteStationType: FavouriteStationType)
+    func buttonActionFor(_ favouriteStationActionType: FavouriteStationActionType)
 }
 
 class FavouriteStationView: UIView {
@@ -26,24 +26,39 @@ class FavouriteStationView: UIView {
     @IBOutlet weak var actionButton: UIButton!
     @IBOutlet weak var segmentControl: UISegmentedControl!
     weak var delegate: FavouriteStationViewDelegate?
-
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        segmentControl?.isSelected = false
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        segmentControl?.isSelected = false
+        segmentControl?.isEnabled = false
+        segmentControl?.alpha = 0.3
+        segmentControl?.selectedSegmentIndex = -1
+    }
+    
     @IBAction func buttonAction(_ sender: UIButton) {
-        sender.isSelected = !sender.isSelected
-        let favouriteStationActionType: FavouriteStationActionType =  sender.isSelected ? .add : .delete
+        let favouriteStationActionType: FavouriteStationActionType =  sender.isSelected ? .delete : .add
         delegate?.buttonActionFor(favouriteStationActionType)
     }
     
     @IBAction func segmentControlAction(_ sender: UISegmentedControl) {
         guard let favouriteStationType = FavouriteStationType(rawValue: sender.selectedSegmentIndex) else { return }
-        delegate?.segemntControlActionFor(_favouriteStationType: favouriteStationType)
+        delegate?.segemntControlActionFor(favouriteStationType)
+    }
+    
+    func configureWith(_ station: Station?) {
+        let hasStation = station != nil
+        titleLabel?.text = hasStation ? "\(station?.stationDesc ?? "-")" : "-"
+        actionButton.isSelected = hasStation
+        segmentControl.isEnabled = hasStation
+        segmentControl?.alpha = hasStation ? 1 : 0.3
+        segmentControl?.selectedSegmentIndex = -1
     }
 }

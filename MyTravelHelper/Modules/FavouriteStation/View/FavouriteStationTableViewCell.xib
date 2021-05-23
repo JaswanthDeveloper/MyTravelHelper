@@ -24,8 +24,8 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.seal.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="fNX-k4-QzG">
-                        <rect key="frame" x="296" y="34" width="40" height="41.5"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fNX-k4-QzG">
+                        <rect key="frame" x="296" y="35" width="40" height="40"/>
                         <color key="tintColor" systemColor="systemTealColor"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="hsp-vx-RuF"/>
@@ -34,7 +34,7 @@
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aCq-FZ-2I1">
                         <rect key="frame" x="15" y="109.5" width="326" height="0.5"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.19196810787671242" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="0.5" id="9En-4T-Wts"/>
                         </constraints>
@@ -61,7 +61,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="checkmark.seal.fill" catalog="system" width="128" height="128"/>
         <systemColor name="systemTealColor">
             <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

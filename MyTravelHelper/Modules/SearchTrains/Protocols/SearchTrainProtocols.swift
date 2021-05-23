@@ -13,8 +13,9 @@ protocol ViewToPresenterProtocol: class{
     var interactor: PresenterToInteractorProtocol? {get set}
     var router: PresenterToRouterProtocol? {get set}
     func fetchallStations()
-    func showFavouriteStationController(navigationController:UINavigationController)
+    func showFavouriteStationController(navigationController:UINavigationController, dataSource: FavouriteStationDataSource)
     func searchTapped(source:String,destination:String)
+    func dismissFavouriteStationController(navigationController:UINavigationController)
 }
 
 protocol PresenterToViewProtocol: class{
@@ -28,7 +29,8 @@ protocol PresenterToViewProtocol: class{
 
 protocol PresenterToRouterProtocol: class {
     static func createModule()-> SearchTrainViewController
-    func pushToFavouriteStationScreen(navigationConroller:UINavigationController)
+    func pushToFavouriteStationScreen(navigationController:UINavigationController, dataSource: FavouriteStationDataSource)
+    func popFavouriteStationScreen(navigationController:UINavigationController)
 }
 
 protocol PresenterToFavouriteStationRouterProtocol: class {

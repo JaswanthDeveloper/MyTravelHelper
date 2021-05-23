@@ -37,6 +37,7 @@
 		AC914E982658254200CCC67D /* FavouriteStationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC914E972658254200CCC67D /* FavouriteStationView.xib */; };
 		ACCC70ED264B084200CB94D1 /* FavouriteStationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCC70EC264B084200CB94D1 /* FavouriteStationHeaderView.swift */; };
 		ACCC70F1264B085500CB94D1 /* FavouriteStationHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACCC70F0264B085500CB94D1 /* FavouriteStationHeaderView.xib */; };
+		ACFFB1AB265AE27B00F90AC0 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFFB1AA265AE27B00F90AC0 /* UIViewController+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		AC914E972658254200CCC67D /* FavouriteStationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavouriteStationView.xib; sourceTree = "<group>"; };
 		ACCC70EC264B084200CB94D1 /* FavouriteStationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteStationHeaderView.swift; sourceTree = "<group>"; };
 		ACCC70F0264B085500CB94D1 /* FavouriteStationHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavouriteStationHeaderView.xib; sourceTree = "<group>"; };
+		ACFFB1AA265AE27B00F90AC0 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		AF635B96516F13D67ADE01AF /* Pods_MyTravelHelper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTravelHelper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD4A9E0F8C97F8AA92AAA053 /* Pods_MyTravelHelperTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTravelHelperTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -164,6 +166,7 @@
 			children = (
 				753C8FB822367E64005FF13B /* App-Ui */,
 				753F086F22361A5100175107 /* App-utils */,
+				ACFFB1A9265AE25600F90AC0 /* Extensions */,
 				753F08672236190700175107 /* Modules */,
 				753F0846223618AB00175107 /* AppDelegate.swift */,
 				753F084D223618AD00175107 /* Assets.xcassets */,
@@ -312,6 +315,14 @@
 				AC72C84426597CA20097E973 /* FavouriteStationTableViewCell.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		ACFFB1A9265AE25600F90AC0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				ACFFB1AA265AE27B00F90AC0 /* UIViewController+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -491,6 +502,7 @@
 				753C8FA522361EC9005FF13B /* StationInfo.swift in Sources */,
 				753C8FBC223731E3005FF13B /* Reachability.swift in Sources */,
 				AC72A71F2651A12300AF7F75 /* FavouriteStationInterator.swift in Sources */,
+				ACFFB1AB265AE27B00F90AC0 /* UIViewController+Extension.swift in Sources */,
 				753C8FA622361EC9005FF13B /* Stations.swift in Sources */,
 				753C8FAC223623C2005FF13B /* SearchTrainInteractor.swift in Sources */,
 				753F087122361A6500175107 /* AppConstants.swift in Sources */,

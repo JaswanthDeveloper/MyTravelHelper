@@ -10,6 +10,6 @@ import Foundation
 
 class FavouriteStationInterator: PresenterToFavouriteStationInteractorProtocol {
     
-    var presenter: InteractorToFavouriteStationPresenterProtocol?
+    weak var presenter: InteractorToFavouriteStationPresenterProtocol?
 
 }

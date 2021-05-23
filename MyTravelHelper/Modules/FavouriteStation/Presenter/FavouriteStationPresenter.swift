@@ -11,9 +11,9 @@ import Foundation
 class FavouriteStationPresenter: ViewToFavouriteStationPresenterProtocol {
     var view: PresenterToFavouriteStationViewProtocol?
     
-    var interactor: PresenterToFavouriteStationInteractorProtocol?
+    weak var interactor: PresenterToFavouriteStationInteractorProtocol?
     
-    var router: PresenterToFavouriteStationRouterProtocol?
+    weak var router: PresenterToFavouriteStationRouterProtocol?
     
     func fetchallStations() {
         

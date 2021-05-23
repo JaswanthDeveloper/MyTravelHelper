@@ -8,11 +8,16 @@
 
 import UIKit
 
-class SearchTrainPresenter:ViewToPresenterProtocol {
-    func showFavouriteStationController(navigationController: UINavigationController) {
-        router?.pushToFavouriteStationScreen(navigationConroller: navigationController)
+class SearchTrainPresenter: ViewToPresenterProtocol {
+ 
+    func showFavouriteStationController(navigationController: UINavigationController, dataSource: FavouriteStationDataSource) {
+        router?.pushToFavouriteStationScreen(navigationController: navigationController, dataSource: dataSource)
     }
     
+    func dismissFavouriteStationController(navigationController: UINavigationController) {
+        router?.popFavouriteStationScreen(navigationController: navigationController)
+    }
+   
     var stationsList:[Station] = [Station]()
 
     func searchTapped(source: String, destination: String) {

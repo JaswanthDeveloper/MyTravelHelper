@@ -17,21 +17,21 @@ class SearchTrainViewController: UIViewController {
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var favouriteStationHolderView: UIView!
     
+    var favouriteStationView: FavouriteStationView!
     var stationsList:[Station] = [Station]()
     var trains:[StationTrain] = [StationTrain]()
     var presenter:ViewToPresenterProtocol?
     var dropDown = DropDown()
     var transitPoints:(source:String,destination:String) = ("","")
-
+    var favouriteStation: Station?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         trainsListTable.isHidden = true
         initialSetup()
     }
     
-    private func initialSetup() {
-        searchButton?.isEnabled = false
-        
+    private func initialSetup() {        
         let favouriteStationView = Bundle.main.loadNibNamed("FavouriteStationView", owner: nil, options: nil)?.first as! FavouriteStationView
         favouriteStationView.delegate = self
         favouriteStationHolderView.addSubview(favouriteStationView)
@@ -42,12 +42,9 @@ class SearchTrainViewController: UIViewController {
         NSLayoutConstraint(item: favouriteStationView, attribute: .bottom, relatedBy: .equal, toItem: favouriteStationHolderView, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
         NSLayoutConstraint(item: favouriteStationView, attribute: .left, relatedBy: .equal, toItem: favouriteStationHolderView, attribute: .left, multiplier: 1.0, constant: 0).isActive = true
         NSLayoutConstraint(item: favouriteStationView, attribute: .right, relatedBy: .equal, toItem: favouriteStationHolderView, attribute: .right, multiplier: 1.0, constant: 0).isActive = true
+        self.favouriteStationView = favouriteStationView
     }
 
-    func updateUI(textField: UITextField, updatedText: String) {
-        searchButton?.isEnabled = !((sourceTxtField == sourceTxtField ? destinationTextField : sourceTxtField).text?.isEmpty ?? false || updatedText.isEmpty)
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if stationsList.count == 0 {
@@ -59,6 +56,10 @@ class SearchTrainViewController: UIViewController {
 
     @IBAction func searchTrainsTapped(_ sender: Any) {
         view.endEditing(true)
+        guard !(sourceTxtField.text?.isEmpty ?? false) && !(destinationTextField.text?.isEmpty ?? false) else {
+            showAlertMessage("Please select both Source and Destination stations.")
+            return
+        }
         showProgressIndicator(view: self.view)
         presenter?.searchTapped(source: transitPoints.source, destination: transitPoints.destination)
     }
@@ -109,6 +110,11 @@ extension SearchTrainViewController:PresenterToViewProtocol {
         }
         SwiftSpinner.hide()
     }
+    
+    private func dismissFavouriteStationViewController() {
+        guard let navigationController = navigationController else { return }
+        presenter?.dismissFavouriteStationController(navigationController: navigationController)
+    }
 }
 
 extension SearchTrainViewController:UITextFieldDelegate {
@@ -142,7 +148,6 @@ extension SearchTrainViewController:UITextFieldDelegate {
             }else {
                 desiredSearchText = String(desiredSearchText.dropLast())
             }
-            updateUI(textField: textField, updatedText: desiredSearchText)
             dropDown.dataSource = stationsList.map {$0.stationDesc}
             dropDown.show()
             dropDown.reloadAllComponents()
@@ -176,14 +181,41 @@ extension SearchTrainViewController:UITableViewDataSource,UITableViewDelegate {
 }
 
 extension SearchTrainViewController: FavouriteStationViewDelegate {
-    func segemntControlActionFor(_favouriteStationType: FavouriteStationType) {
-        
-    }
+    func segemntControlActionFor(_ favouriteStationType: FavouriteStationType) {
+        switch favouriteStationType {
+        case .source:
+            sourceTxtField?.text = favouriteStation?.stationDesc
+        case .destination:
+            destinationTextField?.text = favouriteStation?.stationDesc
+        }
+    }   
     
-    func buttonActionFor(_ avouriteStationActionType: FavouriteStationActionType) {
+    func buttonActionFor(_ favouriteStationActionType: FavouriteStationActionType) {
         guard let navigationController = navigationController else { return }
-        presenter?.showFavouriteStationController(navigationController: navigationController)
+        switch favouriteStationActionType {
+        case .add:
+            // test station
+            let station = Station(desc: "Belfast Central", latitude: 54.6123, longitude: -5.91744, code: "BFSTC", stationId: 228)
+            let station2 = Station(desc: "Delhi", latitude: 54.6123, longitude: -5.91744, code: "BFSTC", stationId: 228)
+            let station3 = Station(desc: "Bangalore", latitude: 54.6123, longitude: -5.91744, code: "BFSTC", stationId: 228)
+            
+            stationsList.append(contentsOf: [station, station2, station3])
+            let favouriteStationDataSource = FavouriteStationDataSource(stationsList: stationsList, selectedStation: favouriteStation)
+            presenter?.showFavouriteStationController(navigationController: navigationController, dataSource: favouriteStationDataSource)
+        default:
+            favouriteStationView?.configureWith(nil)
+        }
+    }
+}
+
+extension SearchTrainViewController: FavouriteStationDelegate {
+    func onCancel() {
+        dismissFavouriteStationViewController()
     }
     
-    
+    func onSlection(_ station: Station) {
+        dismissFavouriteStationViewController()
+        favouriteStation = station
+        favouriteStationView.configureWith(station)
+    }
 }
