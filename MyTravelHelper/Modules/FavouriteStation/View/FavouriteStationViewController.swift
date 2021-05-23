@@ -31,8 +31,9 @@ class FavouriteStationViewController: UIViewController {
 
     @IBOutlet weak var stationListTableView: UITableView!
     @IBOutlet weak var holderView: UIView!
+    @IBOutlet weak var alertLabel: UILabel!
+
     weak var delegate: FavouriteStationDelegate?
-    
     private var stationsList: [Station] {
         return favouriteStationDataSource?.stationsList ?? []
     }
@@ -53,6 +54,7 @@ class FavouriteStationViewController: UIViewController {
         holderView?.layer.cornerRadius = 20
         holderView?.layer.borderColor = UIColor.black.cgColor
         holderView.clipsToBounds = true
+        alertLabel?.isHidden = !stationsList.isEmpty
     }
     
     func configureTableView() {

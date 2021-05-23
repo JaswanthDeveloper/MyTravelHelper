@@ -235,11 +235,18 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="sectionIndexBackgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Stations found." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RZp-S8-1gf">
+                                        <rect key="frame" x="76" y="283" width="142" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="R6v-c9-3fw" firstAttribute="top" secondItem="TWB-si-Kx7" secondAttribute="top" constant="20" id="4R1-yM-LQx"/>
                                     <constraint firstItem="9C2-dR-7TS" firstAttribute="top" secondItem="R6v-c9-3fw" secondAttribute="bottom" constant="20" id="5ia-C4-ELO"/>
+                                    <constraint firstItem="RZp-S8-1gf" firstAttribute="centerY" secondItem="TWB-si-Kx7" secondAttribute="centerY" id="GYf-3c-eto"/>
                                     <constraint firstItem="tmV-5W-0yI" firstAttribute="leading" secondItem="TWB-si-Kx7" secondAttribute="leading" id="P9x-aM-7Vd"/>
                                     <constraint firstAttribute="bottom" secondItem="tmV-5W-0yI" secondAttribute="bottom" id="Y6K-aa-Hjf"/>
                                     <constraint firstAttribute="trailing" secondItem="9C2-dR-7TS" secondAttribute="trailing" id="aAQ-Xx-pLI"/>
@@ -247,6 +254,7 @@
                                     <constraint firstAttribute="trailing" secondItem="R6v-c9-3fw" secondAttribute="trailing" constant="10" id="bVf-Hy-D8b"/>
                                     <constraint firstAttribute="trailing" secondItem="tmV-5W-0yI" secondAttribute="trailing" id="d0X-jM-QqJ"/>
                                     <constraint firstItem="R6v-c9-3fw" firstAttribute="leading" secondItem="TWB-si-Kx7" secondAttribute="leading" constant="10" id="l0w-SL-PMv"/>
+                                    <constraint firstItem="RZp-S8-1gf" firstAttribute="centerX" secondItem="TWB-si-Kx7" secondAttribute="centerX" id="r3R-J1-Sws"/>
                                     <constraint firstItem="9C2-dR-7TS" firstAttribute="leading" secondItem="TWB-si-Kx7" secondAttribute="leading" id="sXc-it-6em"/>
                                 </constraints>
                             </view>
@@ -282,6 +290,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="alertLabel" destination="RZp-S8-1gf" id="eVN-y0-Zee"/>
                         <outlet property="holderView" destination="TWB-si-Kx7" id="wxG-MO-Yov"/>
                         <outlet property="stationListTableView" destination="tmV-5W-0yI" id="nA6-Vr-wd1"/>
                     </connections>

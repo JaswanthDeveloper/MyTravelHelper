@@ -54,8 +54,6 @@ protocol InteractorToFavouriteStationPresenterProtocol: class {
     func favouriteStation(_ station: Station)
  }
 
-
-
 protocol ViewToFavouriteStationPresenterProtocol: class{
     var view: PresenterToFavouriteStationViewProtocol? {get set}
     var interactor: PresenterToFavouriteStationInteractorProtocol? {get set}
@@ -66,11 +64,9 @@ protocol ViewToFavouriteStationPresenterProtocol: class{
 
 
 protocol PresenterToFavouriteStationViewProtocol: class{
-
 }
 
 protocol PresenterToFavouriteStationInteractorProtocol: class {
     var presenter:InteractorToFavouriteStationPresenterProtocol? {get set}
-
 }
 

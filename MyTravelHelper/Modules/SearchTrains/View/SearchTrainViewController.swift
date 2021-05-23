@@ -194,13 +194,15 @@ extension SearchTrainViewController: FavouriteStationViewDelegate {
         guard let navigationController = navigationController else { return }
         switch favouriteStationActionType {
         case .add:
-            // test station
+            /*
+            // uncomment to add test stations
+    
             let station = Station(desc: "Belfast Central", latitude: 54.6123, longitude: -5.91744, code: "BFSTC", stationId: 228)
             let station2 = Station(desc: "Delhi", latitude: 54.6123, longitude: -5.91744, code: "BFSTC", stationId: 228)
             let station3 = Station(desc: "Bangalore", latitude: 54.6123, longitude: -5.91744, code: "BFSTC", stationId: 228)
-            
             stationsList.append(contentsOf: [station, station2, station3])
-            let favouriteStationDataSource = FavouriteStationDataSource(stationsList: stationsList, selectedStation: favouriteStation)
+           */
+        let favouriteStationDataSource = FavouriteStationDataSource(stationsList: stationsList, selectedStation: favouriteStation)
             presenter?.showFavouriteStationController(navigationController: navigationController, dataSource: favouriteStationDataSource)
         default:
             favouriteStationView?.configureWith(nil)
